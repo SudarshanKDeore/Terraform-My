@@ -2,7 +2,7 @@
  # Jenkins-Terraform_Create-EC2-module-ENV
 
  ---------------------------------------
- ##🚀 HOW TO RUN (PER ENV)
+## HOW TO RUN (PER ENV)
 ----------------------------------------
 ## Test
 ```
@@ -22,7 +22,7 @@ terraform init -backend-config=backend-prod.tf
 terraform apply -var-file=env/prod.tfvars
 ```
 ------------------------------------------
- ## ✅ FINAL RESULT
+ ## FINAL RESULT
 ```
 ✔ Remote backend per environment
 ✔ Environment-specific tags
@@ -30,6 +30,7 @@ terraform apply -var-file=env/prod.tfvars
 ✔ Production-grade Terraform structure
 -------------------------------------------
 ```
+
 
 
 
