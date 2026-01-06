@@ -1,6 +1,3 @@
-#############################
-# Terraform & Provider
-#############################
 terraform {
   required_providers {
     aws = {
@@ -15,13 +12,12 @@ provider "aws" {
   region = var.aws_region
 }
 
-#############################
-# Call EC2 Module
-#############################
 module "ec2" {
   source = "./modules/ec2"
 
   ami_id        = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
+  environment   = var.environment
+  s3_bucket     = var.s3_bucket
 }
