@@ -1,14 +1,19 @@
 variable "ami_id" {
-  description = "AMI ID"
-  type        = string
+  type = string
 }
 
 variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
+  type = string
 }
 
 variable "key_name" {
-  description = "Key pair name"
-  type        = string
+  type = string
+}
+
+variable "environment" {
+  type = string
+}
+
+variable "s3_bucket" {
+  type = string
 }
