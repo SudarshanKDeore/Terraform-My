@@ -7,7 +7,8 @@
 ## Test
  '''bash
 terraform init -backend-config=backend-test.tf
-terraform apply -var-file=env/test.tfvars'''
+terraform apply -var-file=env/test.tfvars
+'''
 ----------------------------------------
 ## Staging
 
@@ -26,6 +27,7 @@ terraform apply -var-file=env/prod.tfvars
 ✔ EC2 IAM role with S3 access
 ✔ Production-grade Terraform structure
 -------------------------------------------
+
 
 
 
