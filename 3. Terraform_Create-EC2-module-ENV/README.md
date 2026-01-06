@@ -28,8 +28,9 @@ terraform apply -var-file=env/prod.tfvars
 ✔ Environment-specific tags
 ✔ EC2 IAM role with S3 access
 ✔ Production-grade Terraform structure
--------------------------------------------
 ```
+-------------------------------------------
+
 
 
 
