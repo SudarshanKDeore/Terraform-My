@@ -1,0 +1,6 @@
+aws_region    = "us-east-1"
+ami_id        = "ami-0ecb62995f68bb549"
+instance_type = "t3.small"
+key_name      = "staging-key"
+environment   = "staging"
+s3_bucket     = "my-staging-app-bucket"
