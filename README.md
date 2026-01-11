@@ -50,6 +50,8 @@ pipeline {
     }
   }
 }
+
+“BUILD_NUMBER is a Jenkins-provided environment variable that uniquely identifies each pipeline run and is commonly used to version Docker images.
 ```
 
 ## Flow:
@@ -69,32 +71,27 @@ Pods created → Service exposes → Ingress routes traffic
 ```
 Kubernetes decides which cluster to deploy to by using the kubeconfig file.
 kubectl always talks to the cluster defined in kubeconfig.
-
 In Jenkins, this is controlled by:
 
 KUBECONFIG=/path/to/kubeconfig
-
 
 or by setting the correct context inside kubeconfig.
 
 Your YAML does not decide the cluster.
 kubectl decides the cluster based on kubeconfig.
-
 Typical kubeconfig structure:
 
 ~/.kube/config
+```
 
-
-Contains:
-
+## Contains:
+```
 Clusters (dev, test, prod)
-
 Users (IAM role / token / cert)
-
 Contexts (cluster + user + namespace mapping)
-
-Example:
-
+```
+## Example:
+```
 contexts:
 - name: dev
   context:
@@ -107,26 +104,24 @@ contexts:
     cluster: prod-cluster
     user: prod-user
     namespace: production
-
+```
 
 In Jenkins you do:
+## For DEV:
+```
+  kubectl config use-context dev
+  kubectl apply -f k8s/
+```
 
-For DEV:
-
-kubectl config use-context dev
-kubectl apply -f k8s/
-
-
-For PROD:
-
-kubectl config use-context prod
-kubectl apply -f k8s/
-
+## For PROD:
+```
+  kubectl config use-context prod
+  kubectl apply -f k8s/
+```
 
 Now the same YAML is deployed to different clusters.
-
-In Jenkins pipeline:
-
+## In Jenkins pipeline:
+```
 pipeline {
   agent any
   parameters {
@@ -151,43 +146,31 @@ pipeline {
   }
 }
 
-
 In AWS EKS, kubeconfig is created using:
-
-aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
-
-
+     aws eks update-kubeconfig --region us-east-1 --name my-eks-cluster
+```
+```
 This command:
-
 Fetches cluster endpoint
-
 Stores credentials
-
 Updates kubeconfig
 
 Each environment usually has:
-
-dev-eks
-staging-eks
-prod-eks
-
+    dev-eks
+    staging-eks
+    prod-eks
 
 Also namespaces separate environments inside same cluster:
-
 metadata:
   namespace: production
 
-
 So deployment is controlled by:
-
 kubeconfig → which cluster
-
 context → which cluster + user
-
 namespace → which environment inside cluster
-
-Architecture:
-
+```
+## Architecture:
+```
 Jenkins
   ↓ (kubeconfig)
 kubectl
@@ -195,10 +178,10 @@ kubectl
 EKS Cluster (dev / staging / prod)
   ↓
 Namespace (dev / staging / prod)
+```
 
-
-Interview one-liner:
-
+## Interview one-liner:
+```
 Kubernetes knows where to deploy because kubectl uses kubeconfig. Jenkins switches kubeconfig context or cluster credentials, and then kubectl applies the YAML to that selected cluster and namespace.
 ```
 
